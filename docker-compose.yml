@@ -20,7 +20,7 @@ services:
     ports:
       - 1337
     volumes:
-      - ./:/srv/app
+      - ./app:/srv/app
     depends_on:
       - db
       - traefik

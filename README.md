@@ -29,12 +29,14 @@ environment:
 
 ## Setup
 
-Install docker https://docs.docker.com/engine/install/ubuntu/
+Install docker https://docs.docker.com/engine/install/ubuntu/ and docker-compose
 
 `git clone https://github.com/insuusvenerati/strapi-docker`
 
 Create a `.env` file from `.env-sample` and fill in the empty fields.
 
+Create a folder called `app` for Strapi to live in.
+
 `docker-compose up -d` to start the services.
 
-Monitor logs with `docker-compose logs -f`
+> Monitor logs with `docker-compose logs -f`

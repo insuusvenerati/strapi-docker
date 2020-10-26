@@ -51,12 +51,9 @@ services:
       CF_API_EMAIL: ${CF_API_EMAIL}
       CF_API_KEY: ${CF_API_KEY}
     command:
-      - "--debug=true" # For debugging only
-      - "--logLevel=ERROR" # For debugging only
+      - "--log.level=ERROR" # For debugging only
       - "--api.insecure=true" # Do not enable in production
-      - "--providers.docker"
-      - "--docker.watch=true"
-      - "--docker.domain="
+      - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
@@ -66,10 +63,10 @@ services:
       # - "--providers.docker.tls.key=/key.pem"
       # - "--certificatesresolvers.secure.acme.httpchallenge=true" # Use this OR dnschallenge not both
       # - "--certificatesresolvers.secure.acme.httpchallenge.entrypoint=web"
-      # - "--certificatesresolvers.secure.acme.dnschallenge=true"
-      # - "--certificatesresolvers.secure.acme.dnschallenge.provider=cloudflare"
-      # - "--certificatesresolvers.secure.acme.email=" # Optional
-      # - "--certificatesresolvers.secure.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.secure.acme.dnschallenge=true"
+      - "--certificatesresolvers.secure.acme.dnschallenge.provider=cloudflare"
+      - "--certificatesresolvers.secure.acme.email=" # Optional
+      - "--certificatesresolvers.secure.acme.storage=/letsencrypt/acme.json"
       # - "--certificatesresolvers.secure.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory" # Use staging while developing
 
 volumes:

@@ -17,7 +17,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.strapi.rule=Host(`strapi.docker.localhost`)" # Change me to your host name / domain name
       - "traefik.http.routers.strapi.entrypoints=web"
-      # - "traefik.http.routers.whoami.tls.certresolver=secure"
+      # - "traefik.http.routers.strapi.tls.certresolver=secure"
     ports:
       - 1337
     volumes:
@@ -51,8 +51,12 @@ services:
       CF_API_EMAIL: ${CF_API_EMAIL}
       CF_API_KEY: ${CF_API_KEY}
     command:
+      - "--debug=true" # For debugging only
+      - "--logLevel=ERROR" # For debugging only
       - "--api.insecure=true" # Do not enable in production
       - "--providers.docker"
+      - "--docker.watch=true"
+      - "--docker.domain="
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
@@ -60,9 +64,11 @@ services:
       # - "--providers.docker.tls.ca=/ca.pem"
       # - "--providers.docker.tls.cert=/cert.pem"
       # - "--providers.docker.tls.key=/key.pem"
+      # - "--certificatesresolvers.secure.acme.httpchallenge=true" # Use this OR dnschallenge not both
+      # - "--certificatesresolvers.secure.acme.httpchallenge.entrypoint=web"
       # - "--certificatesresolvers.secure.acme.dnschallenge=true"
       # - "--certificatesresolvers.secure.acme.dnschallenge.provider=cloudflare"
-      # - "--certificatesresolvers.secure.acme.email="
+      # - "--certificatesresolvers.secure.acme.email=" # Optional
       # - "--certificatesresolvers.secure.acme.storage=/letsencrypt/acme.json"
       # - "--certificatesresolvers.secure.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory" # Use staging while developing
 

@@ -25,7 +25,7 @@ environment:
   DATABASE_PASSWORD: ${DATABASE_PASSWORD}
 ```
 
-# Get started
+<!-- # Get started
 
 ## Setup
 
@@ -39,4 +39,4 @@ Create a folder called `app` for Strapi to live in.
 
 `docker-compose up -d` to start the services.
 
-> Monitor logs with `docker-compose logs -f`
+> Monitor logs with `docker-compose logs -f` -->

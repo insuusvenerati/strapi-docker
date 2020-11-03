@@ -34,9 +34,21 @@ services:
       - "--certificatesresolvers.secure.acme.email=" # Optional
       - "--certificatesresolvers.secure.acme.storage=/letsencrypt/acme.json"
       # - "--certificatesresolvers.secure.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory" # Use staging while developing
+  db:
+    image: "docker.io/bitnami/mongodb:4.4-debian-10"
+    volumes:
+      - "mongodb_data:/bitnami/mongodb"
+    environment:
+      MONGODB_USERNAME: ${DATABASE_USERNAME}
+      MONGODB_PASSWORD: ${DATABASE_PASSWORD}
+      MONGODB_DATABASE: ${DATABASE_NAME}
+    networks:
+      - traefik
 
 networks:
   traefik:
+    external: true
 
 volumes:
   letsencrypt:
+  mongodb_data:

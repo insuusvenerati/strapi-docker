@@ -1,0 +1,42 @@
+version: "3"
+services:
+  traefik:
+    image: traefik
+    container_name: traefik
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    networks:
+      - traefik
+    volumes:
+      - "letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro" # Consider using secure TLS
+    environment:
+      # Cloudflare global API keys
+      CF_API_EMAIL: ${CF_API_EMAIL}
+      CF_API_KEY: ${CF_API_KEY}
+    command:
+      - "--log.level=ERROR" # For debugging only
+      - "--api.insecure=true" # Do not enable in production
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      # - "--providers.docker.endpoint=tcp://127.0.0.1:2376" # Production configuration https://docs.docker.com/engine/security/https/#create-a-ca-server-and-client-keys-with-openssl
+      # - "--providers.docker.tls.ca=/ca.pem"
+      # - "--providers.docker.tls.cert=/cert.pem"
+      # - "--providers.docker.tls.key=/key.pem"
+      # - "--certificatesresolvers.secure.acme.httpchallenge=true" # Use this OR dnschallenge not both
+      # - "--certificatesresolvers.secure.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.secure.acme.dnschallenge=true"
+      - "--certificatesresolvers.secure.acme.dnschallenge.provider=cloudflare"
+      - "--certificatesresolvers.secure.acme.email=" # Optional
+      - "--certificatesresolvers.secure.acme.storage=/letsencrypt/acme.json"
+      # - "--certificatesresolvers.secure.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory" # Use staging while developing
+
+networks:
+  traefik:
+
+volumes:
+  letsencrypt:

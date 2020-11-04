@@ -40,8 +40,8 @@ services:
       - "mongodb_data:/bitnami/mongodb"
     environment:
       MONGODB_ROOT_PASSWORD: ${MONGODB_ROOT_PASSWORD}
-      MONGODB_USERNAME: ${DATABASE_USERNAME}
-      MONGODB_PASSWORD: ${DATABASE_PASSWORD}
+      # MONGODB_USERNAME: ${DATABASE_USERNAME}
+      # MONGODB_PASSWORD: ${DATABASE_PASSWORD}
       MONGODB_DATABASE: ${DATABASE_NAME}
     networks:
       - traefik

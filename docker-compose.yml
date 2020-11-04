@@ -4,7 +4,7 @@ services:
   strapi:
     image: strapi/strapi
     environment:
-      # NODE_ENV: production
+      NODE_ENV: production
       DATABASE_CLIENT: mongo
       DATABASE_HOST: db
       DATABASE_PORT: 27017
@@ -12,7 +12,7 @@ services:
       DATABASE_USERNAME: ${DATABASE_USERNAME}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       AUTHENTICATION_DATABASE: ${DATABASE_NAME}
-    # command: "strapi start" # Comment this out to enable development mode
+    command: "strapi start" # Comment this out to enable development mode
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.strapi.rule=Host(`strapi.docker.localhost`)" # Change me to your host name / domain name
